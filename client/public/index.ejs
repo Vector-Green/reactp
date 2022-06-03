@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="icon" href="<%= require('@/assets/favicon.svg') %>" />
+  <title>VectorGreen</title>
+</head>
+
+<body>
+  <%= "<style>" %>
+  <%= 
+    process.env.NODE_ENV==='production' ?
+      require(`!raw-loader!`+
+        `clean-css-loader?{"level":{"2":{},"1":{"roundingPrecision":"5"}}}!postcss-loader?{"postcssOptions":{"plugins":[["cssnano",{"preset":"advanced"}]]}}!csso-loader!`+
+        `sass-loader!@/extensions/main.scss`).default
+      : require(`!raw-loader!sass-loader!@/extensions/main.scss`).default
+  %>
+  <%= "</style>" %>
+
+  <noscript>
+    <%= require(`@/extensions/sites/noscript/noscript.ejs`)() %>
+
+    <link rel="stylesheet" href="
+      <%= noscriptStyles = process.env.NODE_ENV==='production' ?
+       require(`!file-loader?{"name":"[sha1:contenthash:base62:8].css"}!`+
+       `clean-css-loader?{"level":{"2":{},"1":{"roundingPrecision":"5"}}}!postcss-loader?{"postcssOptions":{"plugins":[["cssnano",{"preset":"advanced"}]]}}!csso-loader!`+
+        `sass-loader!@/extensions/sites/noscript/noscript.scss`).default
+     : require(`!file-loader?{"name":"[sha1:contenthash:base62:8].css"}!sass-loader!@/extensions/sites/noscript/noscript.scss`).default
+     %>
+    ">
+
+  </noscript>
+
+  <div id="root">
+  </div>
+</body>
+
+
+</html>

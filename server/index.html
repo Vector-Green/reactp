@@ -1,0 +1,28 @@
+<head>
+    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+</head>
+<script>
+    // const socket = io.connect('http://localhost:4000');
+    // socket.emit('start');
+    // socket.on('ticker', function (response) {
+    //     console.log(response)
+    // });
+
+
+    let socket;
+
+    socket = io.connect("http://localhost:4000/");
+
+
+    socket.emit("start");
+
+
+    socket.on("ticker", (message) => {
+        console.log(message);
+    });
+
+</script>
+
+<body>
+    <div id="quotes"></div>
+</body>

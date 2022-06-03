@@ -1,0 +1,12 @@
+.nav {
+  transition: height 1s;
+  background: black;
+  &__deployed {
+    background: grey;
+  }
+}
+
+main {
+  transition: height 1s;
+  height: calc(100vh - var(--nav-height));
+}
